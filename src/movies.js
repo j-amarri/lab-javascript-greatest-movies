@@ -37,14 +37,15 @@ function howManyMovies(moviesArray) {
 } */
 
 function ratesAverage(moviesArray) {
-  let initialValue = 0;
+  // not needed let initialValue = 0; i can set it to zero in reduce
+  // let initialValue = 0;
   let moviesRatesAverage = moviesArray.reduce(function (
     accumulator,
     currentValue
   ) {
     return accumulator + currentValue.rate / moviesArray.length;
   },
-  initialValue);
+  0);
   return Math.round(moviesRatesAverage * 100) / 100;
 }
 
@@ -61,14 +62,14 @@ function dramaMoviesRate(moviesArray) {
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {
-  let yearlyOrderedMovies = moviesArray.sort((a, b) => {
+  let moviesCopy = [...moviesArray];
+  let yearlyOrderedMovies = moviesCopy.sort((a, b) => {
     if (a.year > b.year) {
       return 1;
     } else {
       return -1;
     }
   });
-  console.log(yearlyOrderedMovies);
   return yearlyOrderedMovies;
 }
 
@@ -77,7 +78,7 @@ function orderByYear(moviesArray) {
 // returns an array of all titles ordered alphabetically
 function orderAlphabetically(moviesArray) {
   let titleOrderedMovies = moviesArray.map(value => value.title).sort();
-  return titleOrderedMovies;
+  return titleOrderedMovies.slice(0, 20);
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
